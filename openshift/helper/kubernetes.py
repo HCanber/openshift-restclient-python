@@ -4,7 +4,6 @@ from __future__ import absolute_import
 from kubernetes import config
 from kubernetes.client import models as k8s_models
 from kubernetes.client import apis as k8s_apis
-from kubernetes.client import ApiClient, ConfigurationObject
 
 from . import VERSION_RX
 from .base import BaseObjectHelper
@@ -15,8 +14,6 @@ class KubernetesObjectHelper(BaseObjectHelper):
     @staticmethod
     def client_from_config(config_file, context):
         # TODO(fabianvf): probably want to break this branch out or refactor method names
-        if not config_file:
-            return ApiClient(config=ConfigurationObject())
         return config.new_client_from_config(config_file, context)
 
     @classmethod
